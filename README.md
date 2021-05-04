@@ -1,1 +1,1 @@
-# dfyn-sdk
+# Matic SDK for DFYN
