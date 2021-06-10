@@ -1,5 +1,5 @@
 import { Contract } from '@ethersproject/contracts'
-import { getNetwork } from '@ethersproject/networks'
+// import { getNetwork } from '@ethersproject/networks'
 import { getDefaultProvider } from '@ethersproject/providers'
 import { TokenAmount } from './entities/fractions/tokenAmount'
 import { Pair } from './entities/pair'
@@ -35,7 +35,7 @@ export abstract class Fetcher {
   public static async fetchTokenData(
     chainId: ChainId,
     address: string,
-    provider = getDefaultProvider(getNetwork(chainId)),
+    provider = getDefaultProvider("https://rpc-mainnet.maticvigil.com/v1/1fcb1711b433804cea13ef670b1a5245c27562a6"),
     symbol?: string,
     name?: string
   ): Promise<Token> {
@@ -64,7 +64,7 @@ export abstract class Fetcher {
   public static async fetchPairData(
     tokenA: Token,
     tokenB: Token,
-    provider = getDefaultProvider(getNetwork(tokenA.chainId))
+    provider = getDefaultProvider("https://rpc-mainnet.maticvigil.com/v1/1fcb1711b433804cea13ef670b1a5245c27562a6")
   ): Promise<Pair> {
     invariant(tokenA.chainId === tokenB.chainId, 'CHAIN_ID')
     const address = Pair.getAddress(tokenA, tokenB)
