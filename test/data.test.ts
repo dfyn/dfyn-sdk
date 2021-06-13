@@ -13,7 +13,7 @@ describe('data', () => {
   // })
 
   it('Pair', async () => {
-    const token = new Token(ChainId.MATIC, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18) // DAI
+    const token = new Token(ChainId.MATIC, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18) // WETH
     const pair = await Fetcher.fetchPairData(WETH[ChainId.MATIC], token)
     expect(pair.liquidityToken.address).toEqual('0xC3379226AEeF21464d05676305dad1261D6F3FAC')
     expect(pair.liquidityToken.name).toEqual('Dfyn LP Token')

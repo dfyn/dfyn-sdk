@@ -1,8 +1,8 @@
 {
-  "name": "@uniswap/sdk",
+  "name": "@dfyn/sdk",
   "license": "MIT",
-  "version": "3.0.3",
-  "description": "🛠 An SDK for building applications on top of Uniswap.",
+  "version": "0.0.1",
+  "description": "🛠 An SDK for building applications on top of Dfyn.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -10,8 +10,8 @@
   ],
   "repository": "https://github.com/Uniswap/uniswap-sdk.git",
   "keywords": [
-    "uniswap",
-    "ethereum"
+    "dfyn",
+    "Multi-chain AMM"
   ],
   "module": "dist/sdk.esm.js",
   "scripts": {

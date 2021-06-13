@@ -1,6 +1,6 @@
 import JSBI from 'jsbi'
 
-import { SolidityType } from '../constants'
+import { ChainId, SolidityType } from '../constants'
 import { validateSolidityTypeInstance } from '../utils'
 
 /**
@@ -13,10 +13,16 @@ export class Currency {
   public readonly symbol?: string
   public readonly name?: string
 
-  /**
-   * The only instance of the base class `Currency`.
-   */
-  public static readonly ETHER: Currency = new Currency(18, 'MATIC', 'Matic')
+  public readonly usd?: string
+
+  public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'Matic')
+
+  public static readonly OKT: Currency = new Currency(18, 'OKT', 'OKExChain')
+
+  public static readonly NATIVE = {
+    [ChainId.MATIC]: Currency.MATIC,
+    [ChainId.OKEX]: Currency.OKT
+  }
 
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
@@ -31,7 +37,53 @@ export class Currency {
     this.symbol = symbol
     this.name = name
   }
+
+  public static getNativeCurrency(chainId?: ChainId) {
+    if (!chainId) {
+      throw Error(`No chainId ${chainId}`)
+    }
+
+    if (!(chainId in Currency.NATIVE)) {
+      throw Error(`No native currency defined for chainId ${chainId}`)
+    }
+    return Currency.NATIVE[chainId]
+  }
+
+  public static getNativeCurrencySymbol(chainId?: ChainId) {
+    const nativeCurrency = this.getNativeCurrency(chainId)
+    return nativeCurrency.symbol
+  }
+
+  public static getNativeCurrencyName(chainId?: ChainId) {
+    const nativeCurrency = this.getNativeCurrency(chainId)
+    return nativeCurrency.name
+  }
+
+  public getSymbol(chainId?: ChainId) {
+    if (!chainId) {
+      return this?.symbol
+    }
+
+    if (this?.symbol === 'MATIC') {
+      return Currency.getNativeCurrencySymbol(chainId)
+    }
+
+    return this?.symbol
+  }
+
+  public getName(chainId?: ChainId) {
+    if (!chainId) {
+      return this?.name
+    }
+
+    if (this?.name === 'Matic') {
+      return Currency.getNativeCurrencyName(chainId)
+    }
+
+    return this?.name
+  }
 }
 
-const ETHER = Currency.ETHER
-export { ETHER }
+const NATIVE = Currency.MATIC
+
+export { NATIVE }

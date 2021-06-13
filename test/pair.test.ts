@@ -1,8 +1,8 @@
-import { ChainId, Token, Pair, TokenAmount, WETH, Price } from '../src'
+import { ChainId, Token, Pair, TokenAmount, WETH } from '../src'
 
 describe('Pair', () => {
-  const ETH = new Token(ChainId.MATIC, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'ETH', 'Ether (Wrapped)')
-  const DFYN = new Token(ChainId.MATIC, '0xC168E40227E4ebD8C1caE80F7a55a4F0e6D66C97', 18, 'DFYN', 'DFYN TOKEN (PoS)')
+  const ETH = new Token(ChainId.OKEX, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'ETH', 'Ether (Wrapped)')
+  //const DFYN = new Token(ChainId.MATIC, '0xC168E40227E4ebD8C1caE80F7a55a4F0e6D66C97', 18, 'DFYN', 'DFYN TOKEN (PoS)')
 
   describe('constructor', () => {
     it('cannot be used for tokens on different chains', () => {

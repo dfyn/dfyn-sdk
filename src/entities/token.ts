@@ -64,11 +64,11 @@ export const WETH = {
     'WMATIC',
     'Wrapped Matic'
   ),
-  [ChainId.MUMBAI]: new Token(
-    ChainId.MUMBAI,
-    '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+  [ChainId.OKEX]: new Token(
+    ChainId.OKEX,
+    '0x4c28f48448720e9000907bc2611f73022fdce1fa',
     18,
-    'WMATIC',
-    'Wrapped Matic'
+    'WOKT',
+    'Wrapped OKExChain'
   ),
 }
