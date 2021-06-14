@@ -15,11 +15,18 @@ export class Currency {
 
   public readonly usd?: string
 
+  public static readonly ETHER: Currency = new Currency(18, 'ETH', 'Ether')
+
   public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'Matic')
 
   public static readonly OKT: Currency = new Currency(18, 'OKT', 'OKExChain')
 
   public static readonly NATIVE = {
+    [ChainId.MAINNET]: Currency.ETHER,
+    [ChainId.ROPSTEN]: Currency.ETHER,
+    [ChainId.RINKEBY]: Currency.ETHER,
+    [ChainId.GÖRLI]: Currency.ETHER,
+    [ChainId.KOVAN]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.OKEX]: Currency.OKT
   }
@@ -64,7 +71,7 @@ export class Currency {
       return this?.symbol
     }
 
-    if (this?.symbol === 'MATIC') {
+    if (this?.symbol === 'ETH') {
       return Currency.getNativeCurrencySymbol(chainId)
     }
 
@@ -76,7 +83,7 @@ export class Currency {
       return this?.name
     }
 
-    if (this?.name === 'Matic') {
+    if (this?.name === 'Ether') {
       return Currency.getNativeCurrencyName(chainId)
     }
 
@@ -84,6 +91,6 @@ export class Currency {
   }
 }
 
-const NATIVE = Currency.MATIC
+const NATIVE = Currency.ETHER
 
 export { NATIVE }
