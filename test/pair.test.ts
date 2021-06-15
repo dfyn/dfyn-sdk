@@ -20,7 +20,6 @@ describe('Pair', () => {
 
   describe('#token0', () => {
     it('always is the token that sorts before', () => {
- 
       expect(new Pair(new TokenAmount(ETH, '100'), new TokenAmount(DFYN, '100')).token0).toEqual(ETH)
       expect(new Pair(new TokenAmount(DFYN, '100'), new TokenAmount(ETH, '100')).token0).toEqual(ETH)
     })
@@ -84,8 +83,6 @@ describe('Pair', () => {
     it('throws if invalid token', () => {
       expect(() => pair.priceOf(WETH[ChainId.MATIC])).toThrow('TOKEN')
     })
-  
-
   })
 
   describe('#reserveOf', () => {
