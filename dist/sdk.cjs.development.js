@@ -1019,8 +1019,8 @@ var Route = /*#__PURE__*/function () {
     !pairs.every(function (pair) {
       return pair.chainId === pairs[0].chainId;
     }) ?  invariant(false, 'CHAIN_IDS')  : void 0;
-    !(input instanceof Token && pairs[0].involvesToken(input) || input === NATIVE && pairs[0].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'INPUT')  : void 0;
-    !(typeof output === 'undefined' || output instanceof Token && pairs[pairs.length - 1].involvesToken(output) || output === NATIVE && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'OUTPUT')  : void 0;
+    !(input instanceof Token && pairs[0].involvesToken(input) || input instanceof Currency && pairs[0].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'INPUT')  : void 0;
+    !(typeof output === 'undefined' || output instanceof Token && pairs[pairs.length - 1].involvesToken(output) || output instanceof Currency && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'OUTPUT')  : void 0;
     var path = [input instanceof Token ? input : WETH[pairs[0].chainId]];
 
     for (var _iterator = _createForOfIteratorHelperLoose(pairs.entries()), _step; !(_step = _iterator()).done;) {
@@ -1450,8 +1450,8 @@ var Router = /*#__PURE__*/function () {
 
 
   Router.swapCallParameters = function swapCallParameters(trade, options) {
-    var etherIn = trade.inputAmount.currency === NATIVE;
-    var etherOut = trade.outputAmount.currency === NATIVE; // the router does not support both ether in and out
+    var etherIn = trade.inputAmount.currency instanceof Currency;
+    var etherOut = trade.outputAmount.currency instanceof Currency; // the router does not support both ether in and out
 
     !!(etherIn && etherOut) ?  invariant(false, 'ETHER_IN_OUT')  : void 0;
     !(!('ttl' in options) || options.ttl > 0) ?  invariant(false, 'TTL')  : void 0;
