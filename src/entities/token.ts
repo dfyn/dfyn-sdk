@@ -89,7 +89,7 @@ export const WETH = {
   ),
   [ChainId.OKEX]: new Token(
     ChainId.OKEX,
-    '0x4c28f48448720e9000907bc2611f73022fdce1fa',
+    '0x8f8526dbfd6e38e3d8307702ca8469bae6c56c15',
     18,
     'WOKT',
     'Wrapped OKExChain'
