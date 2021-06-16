@@ -24,7 +24,15 @@ export declare const FACTORY_ADDRESS: {
 export declare const ROUTER_ADDRESS: {
     [chainId in ChainId]: string;
 };
-export declare const INIT_CODE_HASH = "0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3";
+export declare const INIT_CODE_HASH: {
+    1: string;
+    4: string;
+    3: string;
+    5: string;
+    42: string;
+    137: string;
+    66: string;
+};
 export declare const MINIMUM_LIQUIDITY: JSBI;
 export declare const ZERO: JSBI;
 export declare const ONE: JSBI;

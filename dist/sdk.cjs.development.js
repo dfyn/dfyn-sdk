@@ -16,7 +16,7 @@ var contracts = require('@ethersproject/contracts');
 var providers = require('@ethersproject/providers');
 var IUniswapV2Pair = _interopDefault(require('@uniswap/v2-core/build/IUniswapV2Pair.json'));
 
-var _FACTORY_ADDRESS, _ROUTER_ADDRESS, _SOLIDITY_TYPE_MAXIMA;
+var _FACTORY_ADDRESS, _ROUTER_ADDRESS, _INIT_CODE_HASH, _SOLIDITY_TYPE_MAXIMA;
 
 (function (ChainId) {
   ChainId[ChainId["MAINNET"] = 1] = "MAINNET";
@@ -40,8 +40,9 @@ var _FACTORY_ADDRESS, _ROUTER_ADDRESS, _SOLIDITY_TYPE_MAXIMA;
 })(exports.Rounding || (exports.Rounding = {}));
 
 var FACTORY_ADDRESS = (_FACTORY_ADDRESS = {}, _FACTORY_ADDRESS[exports.ChainId.MAINNET] = '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac', _FACTORY_ADDRESS[exports.ChainId.ROPSTEN] = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4', _FACTORY_ADDRESS[exports.ChainId.RINKEBY] = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4', _FACTORY_ADDRESS[exports.ChainId.GÖRLI] = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4', _FACTORY_ADDRESS[exports.ChainId.KOVAN] = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4', _FACTORY_ADDRESS[exports.ChainId.MATIC] = '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B', _FACTORY_ADDRESS[exports.ChainId.OKEX] = '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B', _FACTORY_ADDRESS);
-var ROUTER_ADDRESS = (_ROUTER_ADDRESS = {}, _ROUTER_ADDRESS[exports.ChainId.MAINNET] = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F', _ROUTER_ADDRESS[exports.ChainId.RINKEBY] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.ROPSTEN] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.GÖRLI] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.KOVAN] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.MATIC] = '0xA102072A4C07F06EC3B4900FDC4C7B80b6c57429', _ROUTER_ADDRESS[exports.ChainId.OKEX] = '0xc97b581bbbaa66EB427731eF8158882F7b834AaF', _ROUTER_ADDRESS);
-var INIT_CODE_HASH = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3';
+var ROUTER_ADDRESS = (_ROUTER_ADDRESS = {}, _ROUTER_ADDRESS[exports.ChainId.MAINNET] = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F', _ROUTER_ADDRESS[exports.ChainId.RINKEBY] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.ROPSTEN] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.GÖRLI] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.KOVAN] = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506', _ROUTER_ADDRESS[exports.ChainId.MATIC] = '0xA102072A4C07F06EC3B4900FDC4C7B80b6c57429', _ROUTER_ADDRESS[exports.ChainId.OKEX] = '0x34686CBF7229ed0bff2Fbe7ED2CFC916317764f6', _ROUTER_ADDRESS); // export const INIT_CODE_HASH = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3'
+
+var INIT_CODE_HASH = (_INIT_CODE_HASH = {}, _INIT_CODE_HASH[exports.ChainId.MAINNET] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.RINKEBY] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.ROPSTEN] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.GÖRLI] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.KOVAN] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.MATIC] = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3', _INIT_CODE_HASH[exports.ChainId.OKEX] = '0xd9fecb0a9f5bfd6ce2daf90b441ed5860c3fed2fcde57ba9819eb98d2422e418', _INIT_CODE_HASH);
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
 
 var ZERO = /*#__PURE__*/JSBI.BigInt(0);
@@ -835,7 +836,7 @@ var Pair = /*#__PURE__*/function () {
     if (((_PAIR_ADDRESS_CACHE = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE === void 0 ? void 0 : (_PAIR_ADDRESS_CACHE$t = _PAIR_ADDRESS_CACHE[tokens[0].address]) === null || _PAIR_ADDRESS_CACHE$t === void 0 ? void 0 : _PAIR_ADDRESS_CACHE$t[tokens[1].address]) === undefined) {
       var _PAIR_ADDRESS_CACHE2, _extends2, _extends3;
 
-      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = address.getCreate2Address(FACTORY_ADDRESS[tokenA.chainId], solidity.keccak256(['bytes'], [solidity.pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), INIT_CODE_HASH), _extends2)), _extends3));
+      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = address.getCreate2Address(FACTORY_ADDRESS[tokenA.chainId], solidity.keccak256(['bytes'], [solidity.pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), INIT_CODE_HASH[tokenA.chainId]), _extends2)), _extends3));
     }
 
     return PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address];
