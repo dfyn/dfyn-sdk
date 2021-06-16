@@ -179,14 +179,14 @@ export class Trade {
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
         ? amount
-        : route.input === NATIVE
-          ? CurrencyAmount.ether(amounts[0].raw)
+        : (route.input instanceof Currency)
+          ? new CurrencyAmount(route.input, amounts[0].raw)
           : amounts[0]
     this.outputAmount =
       tradeType === TradeType.EXACT_OUTPUT
         ? amount
-        : route.output === NATIVE
-          ? CurrencyAmount.ether(amounts[amounts.length - 1].raw)
+        : (route.output instanceof Currency)
+          ? new CurrencyAmount(route.output, amounts[amounts.length - 1].raw)
           : amounts[amounts.length - 1]
     this.executionPrice = new Price(
       this.inputAmount.currency,
@@ -213,7 +213,7 @@ export class Trade {
         .multiply(this.outputAmount.raw).quotient
       return this.outputAmount instanceof TokenAmount
         ? new TokenAmount(this.outputAmount.token, slippageAdjustedAmountOut)
-        : CurrencyAmount.ether(slippageAdjustedAmountOut)
+        : new CurrencyAmount(this.outputAmount.currency, slippageAdjustedAmountOut)
     }
   }
 
