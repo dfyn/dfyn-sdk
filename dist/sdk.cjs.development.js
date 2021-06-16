@@ -1019,8 +1019,8 @@ var Route = /*#__PURE__*/function () {
     !pairs.every(function (pair) {
       return pair.chainId === pairs[0].chainId;
     }) ?  invariant(false, 'CHAIN_IDS')  : void 0;
-    !(input instanceof Token && pairs[0].involvesToken(input) || input instanceof Currency && pairs[0].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'INPUT')  : void 0;
-    !(typeof output === 'undefined' || output instanceof Token && pairs[pairs.length - 1].involvesToken(output) || output instanceof Currency && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'OUTPUT')  : void 0;
+    !(input instanceof Token && pairs[0].involvesToken(input) || !(input instanceof Token) && input instanceof Currency && pairs[0].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'INPUT')  : void 0;
+    !(typeof output === 'undefined' || output instanceof Token && pairs[pairs.length - 1].involvesToken(output) || !(output instanceof Token) && output instanceof Currency && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])) ?  invariant(false, 'OUTPUT')  : void 0;
     var path = [input instanceof Token ? input : WETH[pairs[0].chainId]];
 
     for (var _iterator = _createForOfIteratorHelperLoose(pairs.entries()), _step; !(_step = _iterator()).done;) {
@@ -1149,13 +1149,13 @@ function tradeComparator(a, b) {
 
 function wrappedAmount(currencyAmount, chainId) {
   if (currencyAmount instanceof TokenAmount) return currencyAmount;
-  if (currencyAmount.currency instanceof Currency) return new TokenAmount(WETH[chainId], currencyAmount.raw);
+  if (!(currencyAmount.currency instanceof Token) && currencyAmount.currency instanceof Currency) return new TokenAmount(WETH[chainId], currencyAmount.raw);
     invariant(false, 'CURRENCY')  ;
 }
 
 function wrappedCurrency(currency, chainId) {
   if (currency instanceof Token) return currency;
-  if (currency instanceof Currency) return WETH[chainId];
+  if (!(currency instanceof Token) && currency instanceof Currency) return WETH[chainId];
     invariant(false, 'CURRENCY')  ;
 }
 /**
@@ -1201,8 +1201,8 @@ var Trade = /*#__PURE__*/function () {
 
     this.route = route;
     this.tradeType = tradeType;
-    this.inputAmount = tradeType === exports.TradeType.EXACT_INPUT ? amount : route.input instanceof Currency ? new CurrencyAmount(route.input, amounts[0].raw) : amounts[0];
-    this.outputAmount = tradeType === exports.TradeType.EXACT_OUTPUT ? amount : route.output instanceof Currency ? new CurrencyAmount(route.output, amounts[amounts.length - 1].raw) : amounts[amounts.length - 1];
+    this.inputAmount = tradeType === exports.TradeType.EXACT_INPUT ? amount : !(route.input instanceof Token) && route.input instanceof Currency ? new CurrencyAmount(route.input, amounts[0].raw) : amounts[0];
+    this.outputAmount = tradeType === exports.TradeType.EXACT_OUTPUT ? amount : !(route.output instanceof Token) && route.output instanceof Currency ? new CurrencyAmount(route.output, amounts[amounts.length - 1].raw) : amounts[amounts.length - 1];
     this.executionPrice = new Price(this.inputAmount.currency, this.outputAmount.currency, this.inputAmount.raw, this.outputAmount.raw);
     this.nextMidPrice = Price.fromRoute(new Route(nextPairs, route.input));
     this.priceImpact = computePriceImpact(route.midPrice, this.inputAmount, this.outputAmount);
@@ -1450,8 +1450,9 @@ var Router = /*#__PURE__*/function () {
 
 
   Router.swapCallParameters = function swapCallParameters(trade, options) {
-    var etherIn = trade.inputAmount.currency instanceof Currency;
-    var etherOut = trade.outputAmount.currency instanceof Currency; // the router does not support both ether in and out
+    var etherIn = trade.inputAmount.currency instanceof Token ? false : true;
+    var etherOut = trade.outputAmount.currency instanceof Token ? false : true;
+    debugger; // the router does not support both ether in and out
 
     !!(etherIn && etherOut) ?  invariant(false, 'ETHER_IN_OUT')  : void 0;
     !(!('ttl' in options) || options.ttl > 0) ?  invariant(false, 'TTL')  : void 0;

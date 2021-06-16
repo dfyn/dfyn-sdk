@@ -21,13 +21,13 @@ export class Route {
     )
     invariant(
       (input instanceof Token && pairs[0].involvesToken(input)) ||
-      (input instanceof Currency && pairs[0].involvesToken(WETH[pairs[0].chainId])),
+      ((!(input instanceof Token) && (input instanceof Currency)) && pairs[0].involvesToken(WETH[pairs[0].chainId])),
       'INPUT'
     )
     invariant(
       typeof output === 'undefined' ||
       (output instanceof Token && pairs[pairs.length - 1].involvesToken(output)) ||
-      (output instanceof Currency && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])),
+      ((!(output instanceof Token) && (output instanceof Currency)) && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId])),
       'OUTPUT'
     )
 
