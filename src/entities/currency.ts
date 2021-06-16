@@ -28,7 +28,8 @@ export class Currency {
     [ChainId.GÖRLI]: Currency.ETHER,
     [ChainId.KOVAN]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
-    [ChainId.OKEX]: Currency.OKT
+    [ChainId.OKEX]: Currency.OKT,
+    [ChainId.MUMBAI]: Currency.MATIC,
   }
 
   /**

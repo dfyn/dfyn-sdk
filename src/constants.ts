@@ -11,6 +11,7 @@ export enum ChainId {
   KOVAN = 42,
   MATIC = 137,
   OKEX = 66,
+  MUMBAI = 80001
 }
 
 export enum TradeType {
@@ -32,6 +33,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
   [ChainId.MATIC]: '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B',
   [ChainId.OKEX]: '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B',
+  [ChainId.MUMBAI]: '0x22e18D791EeE1EE7Eda4c7d6a9D435A8CA10Cf78',
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -42,6 +44,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
   [ChainId.MATIC]: '0xA102072A4C07F06EC3B4900FDC4C7B80b6c57429',
   [ChainId.OKEX]: '0xc97b581bbbaa66EB427731eF8158882F7b834AaF',
+  [ChainId.MUMBAI]: '0x136B1009Ab6324973BE63F100AED7578CC13f3Bc'
 }
 
 export const INIT_CODE_HASH = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3'

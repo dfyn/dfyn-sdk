@@ -94,4 +94,5 @@ export const WETH = {
     'WOKT',
     'Wrapped OKExChain'
   ),
+  [ChainId.MUMBAI]: new Token(ChainId.MUMBAI, '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889', 18, 'WMATIC', 'Wrapped Matic')
 }
