@@ -1451,8 +1451,7 @@ var Router = /*#__PURE__*/function () {
 
   Router.swapCallParameters = function swapCallParameters(trade, options) {
     var etherIn = trade.inputAmount.currency instanceof Token ? false : true;
-    var etherOut = trade.outputAmount.currency instanceof Token ? false : true;
-    debugger; // the router does not support both ether in and out
+    var etherOut = trade.outputAmount.currency instanceof Token ? false : true; // the router does not support both ether in and out
 
     !!(etherIn && etherOut) ? process.env.NODE_ENV !== "production" ? invariant(false, 'ETHER_IN_OUT') : invariant(false) : void 0;
     !(!('ttl' in options) || options.ttl > 0) ? process.env.NODE_ENV !== "production" ? invariant(false, 'TTL') : invariant(false) : void 0;
