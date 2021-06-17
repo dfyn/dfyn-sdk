@@ -1,4 +1,4 @@
-import { BigintIsh, Rounding, SolidityType, TEN } from '../../constants'
+import { BigintIsh, ChainId, Rounding, SolidityType, TEN } from '../../constants'
 import { Currency, NATIVE } from '../currency'
 import { parseBigintIsh, validateSolidityTypeInstance } from '../../utils'
 
@@ -21,9 +21,16 @@ export class CurrencyAmount extends Fraction {
   public static ether(amount: BigintIsh): CurrencyAmount {
     return new CurrencyAmount(NATIVE, amount)
   }
+  /**
+   * Helper that calls the constructor with the NATIVE currency
+   * @param amount ether amount in wei
+   */
+  public static native(amount: BigintIsh, chainId: ChainId): CurrencyAmount {
+    return new CurrencyAmount(Currency.getNativeCurrency(chainId), amount)
+  }
 
   // amount _must_ be raw, i.e. in the native representation
-  protected constructor(currency: Currency, amount: BigintIsh) {
+  constructor(currency: Currency, amount: BigintIsh) {
     const parsedAmount = parseBigintIsh(amount)
     validateSolidityTypeInstance(parsedAmount, SolidityType.uint256)
 
