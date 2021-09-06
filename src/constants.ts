@@ -11,6 +11,7 @@ export enum ChainId {
   KOVAN = 42,
   MATIC = 137,
   OKEX = 66,
+  ARBITRUM = 42161
 }
 
 export enum TradeType {
@@ -32,6 +33,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
   [ChainId.MATIC]: '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B',
   [ChainId.OKEX]: '0xE7Fb3e833eFE5F9c441105EB65Ef8b261266423B',
+  [ChainId.ARBITRUM]: '0xd9820a17053d6314B20642E465a84Bf01a3D64f5',
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -42,6 +44,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
   [ChainId.MATIC]: '0xA102072A4C07F06EC3B4900FDC4C7B80b6c57429',
   [ChainId.OKEX]: '0x34686CBF7229ed0bff2Fbe7ED2CFC916317764f6',
+  [ChainId.ARBITRUM]: '0x4c28f48448720e9000907BC2611F73022fdcE1fA',
 }
 
 // export const INIT_CODE_HASH = '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3'
@@ -53,6 +56,7 @@ export const INIT_CODE_HASH = {
   [ChainId.KOVAN]: '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3',
   [ChainId.MATIC]: '0xf187ed688403aa4f7acfada758d8d53698753b998a3071b06f1b777f4330eaf3',
   [ChainId.OKEX]: '0xd9fecb0a9f5bfd6ce2daf90b441ed5860c3fed2fcde57ba9819eb98d2422e418',
+  [ChainId.ARBITRUM]: '0x95f1fedd25fef548ac7abba06a4f5867804b7eea0ed2c9718be384552585c164',
 }
 
 

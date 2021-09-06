@@ -7,7 +7,8 @@ export declare enum ChainId {
     GÖRLI = 5,
     KOVAN = 42,
     MATIC = 137,
-    OKEX = 66
+    OKEX = 66,
+    ARBITRUM = 42161
 }
 export declare enum TradeType {
     EXACT_INPUT = 0,
@@ -32,6 +33,7 @@ export declare const INIT_CODE_HASH: {
     42: string;
     137: string;
     66: string;
+    42161: string;
 };
 export declare const MINIMUM_LIQUIDITY: JSBI;
 export declare const ZERO: JSBI;
