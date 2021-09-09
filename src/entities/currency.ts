@@ -29,7 +29,8 @@ export class Currency {
     [ChainId.KOVAN]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.OKEX]: Currency.OKT,
-    [ChainId.MUMBAI]: Currency.MATIC,
+    [ChainId.ARBITRUM]: Currency.ETHER
+
   }
 
   /**

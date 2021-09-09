@@ -82,7 +82,7 @@ export const WETH = {
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MATIC]: new Token(
     ChainId.MATIC,
-    '0x4c28f48448720e9000907BC2611F73022fdcE1fA',
+    '0x8973792d9E8EA794E546b62c0f2295e32a6d7E48',
     18,
     'WMATIC',
     'Wrapped Matic'
@@ -94,5 +94,11 @@ export const WETH = {
     'WOKT',
     'Wrapped OKExChain'
   ),
-  [ChainId.MUMBAI]: new Token(ChainId.MUMBAI, '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889', 18, 'WMATIC', 'Wrapped Matic')
+  [ChainId.ARBITRUM]: new Token(
+    ChainId.ARBITRUM,
+    '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
+    18,
+    'WETH',
+    'Wrapped ETH'
+  ),
 }
