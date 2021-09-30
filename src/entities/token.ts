@@ -101,4 +101,40 @@ export const WETH = {
     'WETH',
     'Wrapped ETH'
   ),
+  [ChainId.BSC]: new Token(
+    ChainId.BSC,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
+  [ChainId.FANTOM]: new Token(
+    ChainId.FANTOM,
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    18,
+    'WFTM',
+    'Wrapped FTM'
+  ),
+  [ChainId.HARMONY]: new Token(
+    ChainId.HARMONY,
+    '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a',
+    18,
+    'WONE',
+    'Wrapped ONE'
+  ),
+  [ChainId.XDAI]: new Token(
+    ChainId.XDAI,
+    '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
+    18,
+    'WXDAI',
+    'Wrapped xDai'
+  )
+  ,
+  [ChainId.AVALANCHE]: new Token(
+    ChainId.AVALANCHE,
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+    18,
+    'XAVAX',
+    'Wrapped AVAX'
+  )
 }

@@ -20,6 +20,11 @@ export class Currency {
   public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'Matic')
 
   public static readonly OKT: Currency = new Currency(18, 'OKT', 'OKExChain')
+  public static readonly XDAI: Currency = new Currency(18, 'XDAI', 'xDai')
+  public static readonly ONE: Currency = new Currency(18, 'ONE', 'Harmony')
+  public static readonly BNB: Currency = new Currency(18, 'BNB', 'Binance Coin')
+  public static readonly FTM: Currency = new Currency(18, 'FTM', 'Fantom')
+  public static readonly AVAX: Currency = new Currency(18, 'AVAX', 'Avalanche')
 
   public static readonly NATIVE = {
     [ChainId.MAINNET]: Currency.ETHER,
@@ -29,7 +34,12 @@ export class Currency {
     [ChainId.KOVAN]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.OKEX]: Currency.OKT,
-    [ChainId.ARBITRUM]: Currency.ETHER
+    [ChainId.ARBITRUM]: Currency.ETHER,
+    [ChainId.XDAI]: Currency.XDAI,
+    [ChainId.BSC]: Currency.BNB,
+    [ChainId.FANTOM]: Currency.FTM,
+    [ChainId.HARMONY]: Currency.ONE,
+    [ChainId.AVALANCHE]: Currency.AVAX
 
   }
 
