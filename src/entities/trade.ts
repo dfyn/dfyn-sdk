@@ -133,6 +133,8 @@ export class Trade {
    */
   public readonly priceImpact: Percent
 
+  public readonly dataTx: String | undefined
+
   /**
    * Constructs an exact in trade with the given amount in and route
    * @param route route of the exact in trade
@@ -151,7 +153,7 @@ export class Trade {
     return new Trade(route, amountOut, TradeType.EXACT_OUTPUT)
   }
 
-  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType) {
+  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType, _dataTx?: String) {
     const amounts: TokenAmount[] = new Array(route.path.length)
     const nextPairs: Pair[] = new Array(route.pairs.length)
     if (tradeType === TradeType.EXACT_INPUT) {
@@ -196,6 +198,7 @@ export class Trade {
     )
     this.nextMidPrice = Price.fromRoute(new Route(nextPairs, route.input))
     this.priceImpact = computePriceImpact(route.midPrice, this.inputAmount, this.outputAmount)
+    this.dataTx = _dataTx
   }
 
   /**

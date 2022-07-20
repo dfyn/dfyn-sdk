@@ -25,6 +25,10 @@ export class Currency {
   public static readonly BNB: Currency = new Currency(18, 'BNB', 'Binance Coin')
   public static readonly FTM: Currency = new Currency(18, 'FTM', 'Fantom')
   public static readonly AVAX: Currency = new Currency(18, 'AVAX', 'Avalanche')
+  public static readonly CRO: Currency = new Currency(18, 'CRO', 'CRONOS')
+  public static readonly SHM: Currency = new Currency(18, 'SHM', 'Shardeum')
+  public static readonly KAVA: Currency = new Currency(18, 'KAVA', 'Kava')
+  public static readonly GLMR: Currency = new Currency(18, 'GLMR', 'Moonbeam')
 
   public static readonly NATIVE = {
     [ChainId.MAINNET]: Currency.ETHER,
@@ -39,8 +43,18 @@ export class Currency {
     [ChainId.BSC]: Currency.BNB,
     [ChainId.FANTOM]: Currency.FTM,
     [ChainId.HARMONY]: Currency.ONE,
-    [ChainId.AVALANCHE]: Currency.AVAX
-
+    [ChainId.AVALANCHE]: Currency.AVAX,
+    [ChainId.MUMBAI]: Currency.MATIC,
+    [ChainId.FUJI]: Currency.AVAX,
+    [ChainId.ARBITRUM_RINKEBY]: Currency.ETHER,
+    [ChainId.FANTOM_TESTNET]: Currency.FTM,
+    [ChainId.OPTIMISM]: Currency.ETHER,
+    [ChainId.OPTIMISM_KOVAN]: Currency.ETHER,
+    [ChainId.CRONOS]: Currency.CRO,
+    [ChainId.AURORA]: Currency.ETHER,
+    [ChainId.SHARDEUM]: Currency.SHM,
+    [ChainId.KAVA]: Currency.KAVA,
+    [ChainId.MOONBEAM]: Currency.GLMR,
   }
 
   /**
