@@ -1,7 +1,7 @@
 {
   "name": "dfyn-sdk-v2",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "🛠 An SDK for building applications on top of Dfyn.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,6 +22,7 @@
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
+    "@ethersproject/abi": "^5.0.12",
     "@uniswap/v2-core": "^1.0.0",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
