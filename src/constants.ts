@@ -1,7 +1,7 @@
 import JSBI from 'jsbi'
 
 // exports for external consumption
-export type BigintIsh = JSBI | bigint | string
+export type BigintIsh = JSBI | number | string
 
 export enum ChainId {
   MAINNET = 1,
@@ -104,3 +104,92 @@ export const SOLIDITY_TYPE_MAXIMA = {
   [SolidityType.uint8]: JSBI.BigInt('0xff'),
   [SolidityType.uint256]: JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 }
+
+export const V2_FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.ROPSTEN]: '',
+  [ChainId.RINKEBY]: '',
+  [ChainId.GÖRLI]: '',
+  [ChainId.KOVAN]: '',
+  [ChainId.MATIC]: '0x76e8Ce7D482F29Efd66E4aC1994A13B2Aa398812',
+  [ChainId.OKEX]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.XDAI]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.HARMONY]: '',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+}
+
+
+export const V2_DEPLOYER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.ROPSTEN]: '',
+  [ChainId.RINKEBY]: '',
+  [ChainId.GÖRLI]: '',
+  [ChainId.KOVAN]: '',
+  [ChainId.MATIC]: '0xd3fD03f36F1e490290DEd8f93A098c7C9921AFC7',
+  [ChainId.OKEX]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.XDAI]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.HARMONY]: '',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+}
+export const V2_MASTER_DEPLOYER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.ROPSTEN]: '',
+  [ChainId.RINKEBY]: '',
+  [ChainId.GÖRLI]: '',
+  [ChainId.KOVAN]: '',
+  [ChainId.MATIC]: '0x8b4e43a9922ca57b06Ab3A1Ee222163Cdd504cc1',
+  [ChainId.OKEX]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.XDAI]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.HARMONY]: '',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+}
+
+export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
+
+export const V2_POOL_INIT_CODE_HASH: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.ROPSTEN]: '',
+  [ChainId.RINKEBY]: '',
+  [ChainId.GÖRLI]: '',
+  [ChainId.KOVAN]: '',
+  [ChainId.MATIC]: '0xb1467d61353f1381ce595794734cf69d5ab5cb73d48acc00e8d720d62280c232',
+  [ChainId.OKEX]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.XDAI]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.HARMONY]: '',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+}
+
+
+/**
+ * The default factory enabled fee amounts, denominated in hundredths of bips.
+ */
+export enum FeeAmount {
+  // LOWEST = 100,
+  LOW = 500,
+  // MEDIUM = 3000,
+  // HIGH = 10000
+}
+
+/**
+ * The default factory tick spacings by fee amount.
+ */
+export const TICK_SPACINGS: { [amount in FeeAmount]: number } = {
+  // [FeeAmount.LOWEST]: 1,
+  [FeeAmount.LOW]: 10,
+  // [FeeAmount.MEDIUM]: 60,
+  // [FeeAmount.HIGH]: 200
+}
+
+export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
