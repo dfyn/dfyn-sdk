@@ -1,7 +1,7 @@
 {
   "name": "dfyn-sdk-v2",
   "license": "MIT",
-  "version": "0.0.75",
+  "version": "0.0.76",
   "description": "🛠 An SDK for building applications on top of Dfyn.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
