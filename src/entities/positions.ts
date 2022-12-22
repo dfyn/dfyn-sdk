@@ -251,7 +251,7 @@ export class Position {
       tickUpper: this.tickUpper
     }).amount1
 
-    return { amount0: amount0.quotient, amount1: amount1.quotient }
+    return { amount0: amount0.raw, amount1: amount1.raw }
   }
 
   /**

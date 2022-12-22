@@ -48,9 +48,6 @@ export interface ClaimOrderOptions{
       */
      deadline: BigintIsh
 
-
-     amountToClaim: BigintIsh
-
      unwrapVault: Boolean
 
 }
@@ -119,14 +116,12 @@ export abstract class LimitOrderManager {
     let calldata
 
     const tokenId = toHex(options.tokenId)
-    const amountToClaim=toHex(options.amountToClaim)
     const unwrapVault=options.unwrapVault
     // const involvesETH =
     //   false
 
     calldata=this.INTERFACE.encodeFunctionData('claimLimitOrder',[
         tokenId,
-        amountToClaim,
         unwrapVault
     ])
 

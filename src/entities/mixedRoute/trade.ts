@@ -146,8 +146,8 @@ export class MixedRouteTrade {
       (this._executionPrice = new Price(
         this.inputAmount.currency,
         this.outputAmount.currency,
-        this.inputAmount.quotient,
-        this.outputAmount.quotient
+        this.inputAmount.raw,
+        this.outputAmount.raw
       ))
     )
   }
@@ -381,7 +381,7 @@ export class MixedRouteTrade {
     const slippageAdjustedAmountOut = new Fraction(ONE)
       .add(slippageTolerance)
       .invert()
-      .multiply(amountOut.quotient).quotient
+      .multiply(amountOut.raw).quotient
     return new CurrencyAmount(amountOut.currency, slippageAdjustedAmountOut)
   }
 
@@ -405,8 +405,8 @@ export class MixedRouteTrade {
     return new Price(
       this.inputAmount.currency,
       this.outputAmount.currency,
-      this.maximumAmountIn(slippageTolerance).quotient,
-      this.minimumAmountOut(slippageTolerance).quotient
+      this.maximumAmountIn(slippageTolerance).raw,
+      this.minimumAmountOut(slippageTolerance).raw
     )
   }
 

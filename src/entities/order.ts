@@ -77,12 +77,12 @@ enum ORDER_TYPE {
     if (this._tokenAmountIn === null) {
       if (this.zeroForOne) {
         this._tokenAmountIn = new TokenAmount(
-          this.pool.token1,
+          this.pool.token0,
           this.amountIn.toString()
         )
       } else {
         this._tokenAmountIn = new TokenAmount(
-            this.pool.token0, 
+            this.pool.token1, 
             this.amountIn.toString()
         )
       }
@@ -99,7 +99,7 @@ enum ORDER_TYPE {
         let amountOut = FullMath.mulDivRoundingUp(this.amountIn, this.sqrtpriceX96, Q96);
         amountOut = FullMath.mulDivRoundingUp(amountOut, this.sqrtpriceX96, Q96);        
         this._expectedTokenAmountOut = new TokenAmount(
-          this.pool.token0,
+          this.pool.token1,
           amountOut.toString()
         )
       } else {
@@ -108,7 +108,7 @@ enum ORDER_TYPE {
         amountOut = FullMath.mulDivRoundingUp(amountOut, Q96,
             this.sqrtpriceX96);
         this._expectedTokenAmountOut = new TokenAmount(
-            this.pool.token1, 
+            this.pool.token0, 
             amountOut.toString()
         )
       }

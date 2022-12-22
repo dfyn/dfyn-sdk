@@ -169,7 +169,7 @@ export class Pool {
 
     const { amountCalculated: outputAmount, sqrtRatioX96, liquidity, tickCurrent } = await this.swap(
       zeroForOne,
-      inputAmount.quotient,
+      inputAmount.raw,
       sqrtPriceLimitX96
     )
     const outputToken = zeroForOne ? this.token1 : this.token0
@@ -199,7 +199,7 @@ export class Pool {
 
     const { amountCalculated: inputAmount, sqrtRatioX96, liquidity, tickCurrent } = await this.swap(
       zeroForOne,
-      JSBI.multiply(outputAmount.quotient, NEGATIVE_ONE),
+      JSBI.multiply(outputAmount.raw, NEGATIVE_ONE),
       sqrtPriceLimitX96
     )
     const inputToken = zeroForOne ? this.token0 : this.token1

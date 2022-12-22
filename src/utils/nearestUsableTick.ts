@@ -13,7 +13,7 @@ export function nearestUsableTick(tick: number, tickSpacing: number,even?:boolea
   const rounded = Math.round(tick / tickSpacing) * tickSpacing
   const evenMultiple=Math.round(Math.round(tick / tickSpacing)/2)*2
   const roundedEven = (evenMultiple) * tickSpacing
-  const roundedOdd = (evenMultiple+1) * tickSpacing
+  const roundedOdd = (evenMultiple-1) * tickSpacing
   if(even===undefined)
   if (rounded < TickMath.MIN_TICK) return rounded + tickSpacing
   else if (rounded > TickMath.MAX_TICK) return rounded - tickSpacing
@@ -27,3 +27,9 @@ export function nearestUsableTick(tick: number, tickSpacing: number,even?:boolea
   else if (roundedOdd > TickMath.MAX_TICK) return roundedOdd - (tickSpacing*2)
   else return roundedOdd
 }
+// if(even===undefined)
+//    return rounded
+//   if(even)
+//    return roundedEven
+//   else
+//    return roundedOdd

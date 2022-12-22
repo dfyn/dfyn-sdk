@@ -201,7 +201,7 @@ export abstract class ConcentratedPoolManager {
               toHex(amount0Desired),
               toHex(amount1Desired),
               true,
-              position.liquidity.toString(),
+              "0",
               "0"    
             //   token0: position.pool.token0.address,
             //   token1: position.pool.token1.address,
@@ -228,7 +228,7 @@ export abstract class ConcentratedPoolManager {
                 toHex(amount0Desired),
                 toHex(amount1Desired),
                 true,
-                position.liquidity.toString(),
+                "0",
                 options.tokenId
               //   token0: position.pool.token0.address,
               //   token1: position.pool.token1.address,

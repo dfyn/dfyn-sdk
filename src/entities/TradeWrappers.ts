@@ -172,8 +172,8 @@ export class MixedTrade {
       (this._executionPrice = new Price(
         this.inputAmount.currency,
         this.outputAmount.currency,
-        this.inputAmount.quotient,
-        this.outputAmount.quotient
+        this.inputAmount.raw,
+        this.outputAmount.raw
       ))
     )
   }
@@ -216,7 +216,7 @@ export class MixedTrade {
       const slippageAdjustedAmountOut = new Fraction(ONE)
         .add(slippageTolerance)
         .invert()
-        .multiply(amountOut.quotient).quotient
+        .multiply(amountOut.raw).quotient
       return new CurrencyAmount(amountOut.currency, slippageAdjustedAmountOut)
     }
   }
@@ -231,7 +231,7 @@ export class MixedTrade {
     if (this.tradeType === TradeType.EXACT_INPUT) {
       return amountIn
     } else {
-      const slippageAdjustedAmountIn = new Fraction(ONE).add(slippageTolerance).multiply(amountIn.quotient).quotient
+      const slippageAdjustedAmountIn = new Fraction(ONE).add(slippageTolerance).multiply(amountIn.raw).quotient
       return new CurrencyAmount(amountIn.currency, slippageAdjustedAmountIn)
     }
   }
@@ -245,8 +245,8 @@ export class MixedTrade {
     return new Price(
       this.inputAmount.currency,
       this.outputAmount.currency,
-      this.maximumAmountIn(slippageTolerance).quotient,
-      this.minimumAmountOut(slippageTolerance).quotient
+      this.maximumAmountIn(slippageTolerance).raw,
+      this.minimumAmountOut(slippageTolerance).raw
     )
   }
 
