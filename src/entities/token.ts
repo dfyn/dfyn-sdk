@@ -82,7 +82,7 @@ export const WETH = {
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MATIC]: new Token(
     ChainId.MATIC,
-    '0x4c28f48448720e9000907bc2611f73022fdce1fa',
+    '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
     18,
     'WMATIC',
     'Wrapped Matic'

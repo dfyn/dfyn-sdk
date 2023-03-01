@@ -1,14 +1,15 @@
 import JSBI from "jsbi"
 import { Pool } from "./pool"
 import invariant from "tiny-invariant"
-import { BigintIsh, Price, TokenAmount,FullMath, TickMath, tickToPrice } from '../index'
+import { BigintIsh, FullMath, Price, TickMath, tickToPrice, TokenAmount, TradeType } from '../index';
 import { Q96 } from "../internalConstants"
 
 interface OrderConstructorArgs {
     pool: Pool
     tick: number
-    amountIn: BigintIsh
+    amount: BigintIsh
     zeroForOne: boolean
+    tradeType: TradeType
 }
 
 enum ORDER_TYPE {
@@ -21,12 +22,16 @@ enum ORDER_TYPE {
  export class Order {
     public readonly pool: Pool
     public readonly tick: number
-    public readonly amountIn: JSBI
+    public readonly amount: JSBI
     public readonly zeroForOne: boolean
+    /**
+     * The type of the trade, either exact in or exact out.
+    */
+    public readonly tradeType: TradeType
 
     // cached resuts for the getters
     private _tokenAmountIn: TokenAmount | null = null
-    private _expectedTokenAmountOut: TokenAmount | null = null
+    private _tokenAmountOut: TokenAmount | null = null
 
       /**
    * Constructs a position for a given pool with the given liquidity
@@ -35,7 +40,7 @@ enum ORDER_TYPE {
    * @param amountIn The amount of liquidity that is in the position
    * @param tickUpper The upper tick of the position
    */
-    public constructor({ pool, tick, amountIn, zeroForOne }:OrderConstructorArgs){
+    public constructor({ pool, tick, amount, zeroForOne, tradeType }:OrderConstructorArgs){
         invariant(tick >= TickMath.MIN_TICK && tick % pool.tickSpacing === 0, 'INVALID_TICK')
         invariant(tick <= TickMath.MAX_TICK && tick % pool.tickSpacing === 0, 'INVALID_TICK')
         // const sqrtpriceX96=TickMath.getSqrtRatioAtTick(tick)
@@ -49,7 +54,8 @@ enum ORDER_TYPE {
         this.pool = pool
         this.tick = tick
         this.zeroForOne = zeroForOne
-        this.amountIn = JSBI.BigInt(amountIn)
+        this.amount = JSBI.BigInt(amount)
+        this.tradeType = tradeType
     }
 
   /**
@@ -75,16 +81,25 @@ enum ORDER_TYPE {
    */
   public get tokenAmountIn(): TokenAmount {
     if (this._tokenAmountIn === null) {
-      if (this.zeroForOne) {
-        this._tokenAmountIn = new TokenAmount(
-          this.pool.token1,
-          this.amountIn.toString()
-        )
+      if (this.tradeType === exports.TradeType.EXACT_INPUT) {
+        if (!this.zeroForOne) {
+          this._tokenAmountIn = new TokenAmount(this.pool.token1, this.amount.toString());
+        } else {
+          this._tokenAmountIn = new TokenAmount(this.pool.token0, this.amount.toString());
+        }
       } else {
-        this._tokenAmountIn = new TokenAmount(
-            this.pool.token0, 
-            this.amountIn.toString()
-        )
+        if (!this.zeroForOne) {
+          // 1 -> 0 
+          var amountIn = FullMath.mulDivRoundingUp(this.amount, this.sqrtpriceX96, Q96);
+          amountIn = FullMath.mulDivRoundingUp(amountIn, this.sqrtpriceX96, Q96);
+          this._tokenAmountIn = new TokenAmount(this.pool.token1, amountIn.toString());
+        } else {
+          // 0 -> 1
+          var _amountIn = FullMath.mulDivRoundingUp(this.amount, Q96, this.sqrtpriceX96);
+
+          _amountIn = FullMath.mulDivRoundingUp(_amountIn, Q96, this.sqrtpriceX96);
+          this._tokenAmountIn = new TokenAmount(this.pool.token0, _amountIn.toString());
+        }
       }
     }
     return this._tokenAmountIn
@@ -93,27 +108,31 @@ enum ORDER_TYPE {
    /**
    * Returns the expected amountOut of limit order
    */
-  public get expectedTokenAmountOut(): TokenAmount {
-    if (this._expectedTokenAmountOut === null) {
-      if (this.zeroForOne) {
-        let amountOut = FullMath.mulDivRoundingUp(this.amountIn, this.sqrtpriceX96, Q96);
-        amountOut = FullMath.mulDivRoundingUp(amountOut, this.sqrtpriceX96, Q96);        
-        this._expectedTokenAmountOut = new TokenAmount(
-          this.pool.token0,
-          amountOut.toString()
-        )
+   public get tokenAmountOut(): TokenAmount {
+    if (this._tokenAmountOut === null) {
+      if (this.tradeType === exports.TradeType.EXACT_OUTPUT) {
+        if (this.zeroForOne) {
+          this._tokenAmountOut = new TokenAmount(this.pool.token1, this.amount.toString());
+        } else {
+          this._tokenAmountOut = new TokenAmount(this.pool.token0, this.amount.toString());
+        }
       } else {
-        let amountOut = FullMath.mulDivRoundingUp(this.amountIn, Q96,
-            this.sqrtpriceX96);
-        amountOut = FullMath.mulDivRoundingUp(amountOut, Q96,
-            this.sqrtpriceX96);
-        this._expectedTokenAmountOut = new TokenAmount(
-            this.pool.token1, 
-            amountOut.toString()
-        )
+        if (this.zeroForOne) {
+          // 0->1
+          var amountOut = FullMath.mulDivRoundingUp(this.amount, this.sqrtpriceX96, Q96);
+          amountOut = FullMath.mulDivRoundingUp(amountOut, this.sqrtpriceX96, Q96);
+          this._tokenAmountOut = new TokenAmount(this.pool.token1, amountOut.toString());
+        } else {
+          // 1->0
+          var _amountOut = FullMath.mulDivRoundingUp(this.amount, Q96, this.sqrtpriceX96);
+
+          _amountOut = FullMath.mulDivRoundingUp(_amountOut, Q96, this.sqrtpriceX96);
+          this._tokenAmountOut = new TokenAmount(this.pool.token0, _amountOut.toString());
+        }
       }
     }
-    return this._expectedTokenAmountOut
+
+    return this._tokenAmountOut;
   }
 
   /**

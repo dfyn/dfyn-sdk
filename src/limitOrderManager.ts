@@ -49,7 +49,6 @@ export interface ClaimOrderOptions{
      deadline: BigintIsh
 
 
-     amountToClaim: BigintIsh
 
      unwrapVault: Boolean
 
@@ -80,13 +79,14 @@ export abstract class LimitOrderManager {
   private constructor() {}
 
   public static createCallParameters(order:Order, options:CreateOrderOptions):MethodParameters {
-    invariant(JSBI.greaterThan(order.amountIn, ZERO), 'ZERO_AMOUNT_IN')
+    invariant(JSBI.greaterThan(order.tokenAmountIn.raw, ZERO), 'ZERO_AMOUNT_IN')
 
     let calldata: string
 
     // get amounts
-    const {zeroForOne,amountIn,tick}=order;
+    const {zeroForOne,tokenAmountIn,tick}=order;
     const {lowerOldTick,upperOldTick}=options
+    const amountIn=tokenAmountIn.raw
 
     calldata=this.INTERFACE.encodeFunctionData('createLimitOrder',[
         Pool.getAddress(order.pool.token0,order.pool.token1),
@@ -103,7 +103,7 @@ export abstract class LimitOrderManager {
       const wrapped = wrappedCurrency(options.useNative,order.tokenAmountIn.token.chainId)
       invariant(order.tokenAmountIn.token.equals(wrapped), 'NO_WETH')
 
-      const wrappedValue = order.amountIn
+      const wrappedValue = amountIn.toString()
 
       value = toHex(wrappedValue)
     }
@@ -119,14 +119,12 @@ export abstract class LimitOrderManager {
     let calldata
 
     const tokenId = toHex(options.tokenId)
-    const amountToClaim=toHex(options.amountToClaim)
     const unwrapVault=options.unwrapVault
     // const involvesETH =
     //   false
 
     calldata=this.INTERFACE.encodeFunctionData('claimLimitOrder',[
         tokenId,
-        amountToClaim,
         unwrapVault
     ])
 

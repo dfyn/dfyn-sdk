@@ -121,11 +121,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
         "internalType": "bool",
         "name": "unwrapVault",
         "type": "bool"
@@ -164,9 +159,9 @@
         "type": "bool"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint128",
         "name": "amountIn",
-        "type": "uint256"
+        "type": "uint128"
       },
       {
         "internalType": "bool",
@@ -308,14 +303,14 @@
         "type": "bool"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint128",
         "name": "amountIn",
-        "type": "uint256"
+        "type": "uint128"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint128",
         "name": "amountOut",
-        "type": "uint256"
+        "type": "uint128"
       },
       {
         "internalType": "uint256",
@@ -326,7 +321,17 @@
         "internalType": "enum ILimitOrderStruct.LimitOrderStatus",
         "name": "status",
         "type": "uint8"
-      }
+      },
+      {
+				"internalType": "uint256",
+				"name": "claimableGrowth0",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "claimableGrowth1",
+				"type": "uint256"
+		  }
     ],
     "stateMutability": "view",
     "type": "function"
