@@ -47,7 +47,7 @@ export interface ClaimOrderOptions {
   /**
    * Indicates the ID of the position to collect for.
    */
-  tokenId: BigintIsh
+  tokenId: BigintIsh | BigintIsh[]
 
   /**
    * When the transaction expires, in epoch seconds.
@@ -61,7 +61,7 @@ export interface CancelOrderOptions {
   /**
    * Indicates the ID of the position to collect for.
    */
-  tokenId: BigintIsh
+  tokenId: BigintIsh | BigintIsh[]
 
   /**
    * When the transaction expires, in epoch seconds.
@@ -122,47 +122,71 @@ export abstract class LimitOrderManager {
   }
 
   public static claimCallParameters(options: ClaimOrderOptions): MethodParameters {
-    let calldata
+    const calldatas: string[] = []
 
-    const tokenId = toHex(options.tokenId)
     const unwrapVault = options.unwrapVault
-    // const involvesETH =
-    //   false
+    const tokenIdOrIds = options.tokenId
+    if (Array.isArray(tokenIdOrIds)) {
+      // If the tokenIdOrIds is an array of ids, iterate through each ids
+      tokenIdOrIds.forEach((tokenIdinBigInt) => {
+        // Handle each id here
+        const tokenId = toHex(tokenIdinBigInt)
+        calldatas.push(this.INTERFACE.encodeFunctionData('claimLimitOrder', [
+          tokenId,
+          unwrapVault
+        ]))
+      });
+    } else {
+      // If the tokenIdOrIds is a single tokenId, handle it directly
+      const tokenId = toHex(tokenIdOrIds)
+      calldatas.push(this.INTERFACE.encodeFunctionData('claimLimitOrder', [
+        tokenId,
+        unwrapVault
+      ]))
+    }
 
-    calldata = this.INTERFACE.encodeFunctionData('claimLimitOrder', [
-      tokenId,
-      unwrapVault
-    ])
 
     const value = toHex(0)
 
     return {
-      calldata,
+      calldata: Multicall.encodeMulticall(calldatas),
       value
     }
 
-
   }
+
   public static cancelCallParameters(options: CancelOrderOptions): MethodParameters {
-    let calldata
+    let calldatas: string[] = []
 
-    const tokenId = toHex(options.tokenId)
     const unwrapVault = options.unwrapVault
-    // const involvesETH =
-    //   false
+    const tokenIdOrIds = options.tokenId
 
-    calldata = this.INTERFACE.encodeFunctionData('cancelLimitOrder', [
-      tokenId,
-      unwrapVault
-    ])
+    if (Array.isArray(tokenIdOrIds)) {
+      // If the tokenIdOrIds is an array of ids, iterate through each ids
+      tokenIdOrIds.forEach((tokenIdinBigInt) => {
+        // Handle each id here
+        const tokenId = toHex(tokenIdinBigInt)
+        calldatas.push(this.INTERFACE.encodeFunctionData('cancelLimitOrder', [
+          tokenId,
+          unwrapVault
+        ]))
+      });
+    } else {
+      // If the tokenIdOrIds is a single tokenId, handle it directly
+      const tokenId = toHex(tokenIdOrIds)
+      calldatas.push(this.INTERFACE.encodeFunctionData('cancelLimitOrder', [
+        tokenId,
+        unwrapVault
+      ]))
+    }
 
     const value = toHex(0)
 
     return {
-      calldata,
+      calldata: Multicall.encodeMulticall(calldatas),
       value
     }
-
   }
+
 
 }
