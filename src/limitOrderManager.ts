@@ -34,6 +34,11 @@ export interface CreateOrderOptions{
      * The lower and upper old
      */
      upperOldTick: number
+
+     /**
+     * The lower and upper old
+     */
+     recipient: string
  
 }
 
@@ -85,6 +90,7 @@ export abstract class LimitOrderManager {
     const {zeroForOne,tokenAmountIn,tick}=order;
     const {lowerOldTick,upperOldTick}=options;
     const amountIn=tokenAmountIn.raw;
+    const recipient=options.recipient;
 
     calldata=this.INTERFACE.encodeFunctionData('createLimitOrder',[
         Pool.getAddress(order.pool.token0,order.pool.token1),
@@ -93,7 +99,8 @@ export abstract class LimitOrderManager {
         upperOldTick,
         true,
         amountIn.toString(),
-        zeroForOne
+        zeroForOne,
+        recipient
     ])
 
     let value: string = toHex(0)

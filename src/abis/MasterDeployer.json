@@ -32,6 +32,11 @@
   },
   {
     "inputs": [],
+    "name": "InvalidLimitOrderFee",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "NotWhitelisted",
     "type": "error"
   },
@@ -286,7 +291,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_dfynFee",
+        "name": "_fee",
         "type": "uint256"
       },
       {
@@ -296,6 +301,19 @@
       }
     ],
     "name": "setDfynFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_dfynFeeTo",
+        "type": "address"
+      }
+    ],
+    "name": "setDfynFeeTo",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
