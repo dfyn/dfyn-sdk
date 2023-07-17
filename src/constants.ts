@@ -16,18 +16,18 @@ export enum ChainId {
   XDAI = 100,
   BSC = 56,
   HARMONY = 1666600000,
-  AVALANCHE = 43114
+  AVALANCHE = 43114,
 }
 
 export enum TradeType {
   EXACT_INPUT,
-  EXACT_OUTPUT
+  EXACT_OUTPUT,
 }
 
 export enum Rounding {
   ROUND_DOWN,
   ROUND_HALF_UP,
-  ROUND_UP
+  ROUND_UP,
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
@@ -79,9 +79,6 @@ export const INIT_CODE_HASH: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '0x512ce213a92fcce51fda9ba8738d5584ab111453ad8da5d2bd7d36bc97d14b5c',
 }
 
-
-
-
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 
 // exports for internal consumption
@@ -97,12 +94,12 @@ export const _1000 = JSBI.BigInt(1000)
 
 export enum SolidityType {
   uint8 = 'uint8',
-  uint256 = 'uint256'
+  uint256 = 'uint256',
 }
 
 export const SOLIDITY_TYPE_MAXIMA = {
   [SolidityType.uint8]: JSBI.BigInt('0xff'),
-  [SolidityType.uint256]: JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+  [SolidityType.uint256]: JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'),
 }
 
 export const V2_FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
@@ -120,7 +117,6 @@ export const V2_FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.AVALANCHE]: '',
 }
-
 
 export const V2_DEPLOYER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
@@ -171,13 +167,12 @@ export const V2_POOL_INIT_CODE_HASH: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '',
 }
 
-
 /**
  * The default factory enabled fee amounts, denominated in hundredths of bips.
  */
 export enum FeeAmount {
   // LOWEST = 100,
-  LOW = 500,
+  LOW = 1500,
   // MEDIUM = 3000,
   // HIGH = 10000
 }

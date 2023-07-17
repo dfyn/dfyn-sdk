@@ -13,7 +13,7 @@
     "dfyn",
     "Multi-chain AMM"
   ],
-  "module": "dist/sdk.esm.js",
+  "module": "dist/dfyn-sdk-v2.esm.js",
   "scripts": {
     "lint": "tsdx lint src test",
     "build": "tsdx build",
