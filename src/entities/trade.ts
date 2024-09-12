@@ -87,13 +87,13 @@ export interface BestTradeOptions {
  * In other words, if the currency is NATIVE, returns the WETH token amount for the given chain. Otherwise, returns
  * the input currency amount.
  */
-function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
+export function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
   if (currencyAmount instanceof TokenAmount) return currencyAmount
   if (!(currencyAmount.currency instanceof Token) && (currencyAmount.currency instanceof Currency)) return new TokenAmount(WETH[chainId], currencyAmount.raw)
   invariant(false, 'CURRENCY')
 }
 
-function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
+export function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
   if (currency instanceof Token) return currency
   if (!(currency instanceof Token) && (currency instanceof Currency)) return WETH[chainId]
   invariant(false, 'CURRENCY')

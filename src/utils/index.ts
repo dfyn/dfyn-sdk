@@ -3,7 +3,7 @@ import warning from 'tiny-warning'
 import JSBI from 'jsbi'
 import { getAddress } from '@ethersproject/address'
 
-import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA } from './constants'
+import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA } from '../constants'
 
 export function validateSolidityTypeInstance(value: JSBI, solidityType: SolidityType): void {
   invariant(JSBI.greaterThanOrEqual(value, ZERO), `${value} is not a ${solidityType}.`)
@@ -25,7 +25,7 @@ export function parseBigintIsh(bigintIsh: BigintIsh): JSBI {
   return bigintIsh instanceof JSBI
     ? bigintIsh
     : typeof bigintIsh === 'bigint'
-    ? JSBI.BigInt(bigintIsh.toString())
+    ? JSBI.BigInt(bigintIsh)
     : JSBI.BigInt(bigintIsh)
 }
 
@@ -80,3 +80,16 @@ export function sortedInsert<T>(items: T[], add: T, maxSize: number, comparator:
     return isFull ? items.pop()! : null
   }
 }
+
+export * from './computePoolAddress'
+export * from './calldata'
+export * from './isSorted'
+export * from './mostSignificantBit'
+export * from './tickList'
+export * from './tickMath'
+export * from './fullMath'
+export * from './priceTickConversions'
+export * from './encodeSqrtRatioX96'
+export * from './maxLiquidityForAmounts'
+export * from './sqrtPriceMath'
+export * from './nearestUsableTick'

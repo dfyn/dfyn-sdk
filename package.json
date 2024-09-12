@@ -1,7 +1,7 @@
 {
-  "name": "@dfyn/sdk",
+  "name": "dfyn-sdk-v2",
   "license": "MIT",
-  "version": "0.0.8",
+  "version": "0.3.91",
   "description": "🛠 An SDK for building applications on top of Dfyn.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -13,7 +13,7 @@
     "dfyn",
     "Multi-chain AMM"
   ],
-  "module": "dist/sdk.esm.js",
+  "module": "dist/dfyn-sdk-v2.esm.js",
   "scripts": {
     "lint": "tsdx lint src test",
     "build": "tsdx build",
@@ -22,6 +22,7 @@
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
+    "@ethersproject/abi": "^5.0.12",
     "@uniswap/v2-core": "^1.0.0",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",

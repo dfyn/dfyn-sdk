@@ -82,7 +82,7 @@ export const WETH = {
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MATIC]: new Token(
     ChainId.MATIC,
-    '0x4c28f48448720e9000907bc2611f73022fdce1fa',
+    '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
     18,
     'WMATIC',
     'Wrapped Matic'
@@ -101,20 +101,9 @@ export const WETH = {
     'WETH',
     'Wrapped ETH'
   ),
-  [ChainId.BSC]: new Token(
-    ChainId.BSC,
-    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-    18,
-    'WBNB',
-    'Wrapped BNB'
-  ),
-  [ChainId.FANTOM]: new Token(
-    ChainId.FANTOM,
-    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-    18,
-    'WFTM',
-    'Wrapped FTM'
-  ),
+
+  [ChainId.BSC]: new Token(ChainId.BSC, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped FTM'),
   [ChainId.HARMONY]: new Token(
     ChainId.HARMONY,
     '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a',
@@ -122,19 +111,20 @@ export const WETH = {
     'WONE',
     'Wrapped ONE'
   ),
-  [ChainId.XDAI]: new Token(
-    ChainId.XDAI,
-    '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
-    18,
-    'WXDAI',
-    'Wrapped xDai'
-  )
-  ,
+  [ChainId.XDAI]: new Token(ChainId.XDAI, '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d', 18, 'WXDAI', 'Wrapped xDai'),
   [ChainId.AVALANCHE]: new Token(
     ChainId.AVALANCHE,
     '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
     18,
     'XAVAX',
     'Wrapped AVAX'
-  )
+  ),
+  // TODO: Base Chain
+  [ChainId.BASE]: new Token(ChainId.BASE, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', 18, 'WETH', 'Wrapped ETH'),
+  // TODO: Optimism Chain
+  [ChainId.OPTIMISM]: new Token(ChainId.BASE, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', 18, 'WETH', 'Wrapped ETH'),
+  // TODO: Mantle Chain
+  [ChainId.MANTLE]: new Token(ChainId.BASE, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', 18, 'WETH', 'Wrapped ETH'),
+   // TODO: Router Chain
+  [ChainId.ROUTER]: new Token(ChainId.ROUTER, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', 18, 'WETH', 'Wrapped ETH')
 }
